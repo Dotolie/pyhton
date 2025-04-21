@@ -1,0 +1,192 @@
+reboot
+S - Format: Log Type - Time(microsec) - Message - Optional Info
+S - Log Type: B - Since Boot(Power On Reset),  D - Delta,  S - Statistic
+S - QC_IMAGE_VERSION_STRING=BOOT.MXF.1.0-01040-LAHAINA-1
+S - IMAGE_VARIANT_STRING=SocKodiakLAA
+S - OEM_IMAGE_VERSION_STRING=SWa7661dd56b
+S - Boot Interface: UFS
+S - Secure Boot: Off
+S - Boot Config @ 0x00786070 = 0x000000c1
+S - JTAG ID @ 0x00786130 = 0x001980e1
+S - OEM ID @ 0x00786138 = 0x00000000
+S - Serial Number @ 0x00786134 = 0x71a83c97
+S - OEM Config Row 0 @ 0x007841c0 = 0x0000000000000000
+S - OEM Config Row 1 @ 0x007841c8 = 0x0000000000000000
+S - Feature Config Row 0 @ 0x00784148 = 0x0000000000000000
+S - Feature Config Row 1 @ 0x00784150 = 0x0000000000000000
+S - Core 0 Frequency, 1516 MHz
+S - PBL Patch Ver: 1
+D -      6633 - pbl_apps_init_timestamp
+D -     37121 - bootable_media_detect_timestamp
+D -       965 - bl_elf_metadata_loading_timestamp
+D -       703 - bl_hash_seg_auth_timestamp
+D -      7243 - bl_elf_loadable_segment_loading_timestamp
+D -      4589 - bl_elf_segs_hash_verify_timestamp
+D -     17369 - bl_sec_hash_seg_auth_timestamp
+D -       821 - bl_sec_segs_hash_verify_timestamp
+D -        28 - pbl_populate_shared_data_and_exit_timestamp
+S -     75472 - PBL, End
+B -     84271 - SBL1, Start
+B -    212981 - SBL1 BUILD @ 19:32:27 on Nov 20 2024
+B -    217007 - usb: usb_shared_hs_phy_init: hs phy cfg size , 0xc
+B -    226188 - usb: eud_serial_upd , 0x71a83c97
+D -    226523 - sbl1_hw_init
+B -    292708 - UFS INQUIRY ID: SKhynix HN8T15BZGKX016  A043
+B -    295148 - UFS Boot LUN: 1
+B -    306189 - UFS GEAR: 3
+D -     80886 - boot_media_init
+D -         0 - smss_load_cancel
+B -    314821 - SMSS -  Image Load, Start
+D -      3050 - SMSS -  Image Loaded, Delta - (0 Bytes)
+D -       976 - Auth Metadata
+D -      5643 - sbl1_xblconfig_init
+B -    329613 - XBL Config -  Image Load, Start
+D -        31 - shrm_load_cancel
+B -    337299 - SHRM -  Image Load, Start
+D -       549 - Auth Metadata
+D -      1281 - Segments hash check
+D -     11773 - SHRM -  Image Loaded, Delta - (39616 Bytes)
+D -         0 - boot_default_cdt_init
+B -    357948 - Using default CDT
+D -      3507 - boot_cdt_init
+B -    364475 - CDT -  Image Load, Start
+B -    367250 - CDT Version:3,Platform ID:34,Major ID:1,Minor ID:0,Subtype:0
+D -     16562 - sbl1_hw_platform_pre_ddr
+D -         0 - devcfg init
+B -    393267 - PMIC A:2.0 B:1.0 C:2.2 I:1.0
+B -    395005 - PM: Reset by PSHOLD
+B -    397415 - PM: Reset Type: Hard Reset
+B -    648979 - PM: SET_VAL:Skip
+B -    648979 - PM: Verifying PON-Trigger specific configurations & current PON-Trigger
+B -    657732 - PM: All PON-Trigger specific configs verified. Proceeding to BOOT
+B -    667218 - PM: PSI: b0x06_v0x3e
+B -    669932 - PM: Device Init # SPMI Transn: 15295
+D -    286975 - pm_device_init, Delta
+B -    675636 - pm_driver_init, Start
+B -    687073 - PM: Driver Init # SPMI Transn: 516
+D -      7960 - pm_driver_init, Delta
+B -    691770 - PM: CHG Type in CHG init : 2
+B -    695308 - usb: usb_shared_hs_phy_init: hs phy cfg size , 0xc
+B -    905087 - usb: usb_shared_hs_phy_init: hs phy cfg size , 0xc
+B -    910882 - PM: usb_dp_toggled_for_cdp : 200ms
+B -    912133 - PM: Battery ID: 100063Ohm
+B -    915915 - PM: VBAT: 4171mV IBAT: 46mA
+B -    919727 - PM: CHG Init # SPMI Transn: 15843
+B -    923692 - vsense_init, Start
+D -        30 - vsense_init, Delta
+D -    556961 - sbl1_hw_pre_ddr_init
+D -       153 - sbl1_sw_load_power_supply
+Wait 3sec (No input) ......Wait 2sec (No input) ......Wait 1sec (No input) ......D -   3009648 - sbl1_sw_console_init
+D -         0 - boot_dload_handle_forced_dload_timeout
+D -      2989 - sbl1_load_ddr_training_data
+B -   3962316 - Pre_DDR_clock_init, Start
+D -        61 - Pre_DDR_clock_init, Delta
+D -     12901 - sbl1_ddr_set_params
+B -   3973997 - sbl1_ddr_init, Start
+B -   3977413 - LP5 DDR detected
+D -     15616 - sbl1_ddr_init, Delta
+B -   3992999 - DSF version = 262.0.47
+B -   3996354 - Manufacturer ID = 6, Device Type = 8
+B -   3999953 - Rank 0 size = 4096 MB, Rank 1 size = 4096 MB
+D -     30866 - sbl1_ddr_init
+D -         0 - boot_pre_ddi_entry
+B -   4013068 - do_ddr_training, Start
+B -   4054243 - DDR: Start of DDR Training Restore
+B -   4057872 - Current DDR Freq = 2096 MHz
+B -   4058909 - Max enabled DDR Freq = 3196 MHz
+B -   4062935 - DDR: End of DDR Training Restore
+D -     51057 - do_ddr_training, Delta
+D -     58865 - sbl1_do_ddr_training
+D -       915 - boot_ddi_entry
+B -   4078765 - Pimem init cmd, entry
+D -      9180 - Pimem init cmd, exit
+B -   4091270 - External heap init, Start
+B -   4094259 - External heap init, End
+D -     22174 - sbl1_post_ddr_init
+D -         0 - sbl1_hw_init_secondary
+B -   4104964 - DDR -  Image Load, Start
+B -   4110942 - UFS 3.x Device Volt set to 2.5 volt
+B -   4113596 - usb: UFS Serial - cf067f77
+B -   4117073 - usb: chgr -  CDP_CHARGER
+B -   4121434 - usb: usb_shared_hs_phy_init: hs phy cfg size , 0xc
+B -   4330390 - usb: usb_dp_toggled_for_cdp , 0xc8
+D -    221826 - boot_fedl_check
+B -   4335056 - APDP -  Image Load, Start
+D -       915 - Auth Metadata
+D -       488 - Segments hash check
+D -      9577 - APDP -  Image Loaded, Delta - (7844 Bytes)
+D -         0 - boot_dload_dump_security_regions
+D -         0 - ramdump_load_cancel
+B -   4357779 - RamDump -  Image Load, Start
+D -      3294 - RamDump -  Image Loaded, Delta - (0 Bytes)
+D -        31 - boot_update_abnormal_reset_status
+D -         0 - boot_cache_set_memory_barrier
+D -         0 - boot_smem_debug_init
+D -       457 - boot_smem_init
+D -        31 - boot_smem_alloc_for_minidump
+D -        92 - boot_smem_store_pon_status
+D -        30 - sbl1_hw_platform_smem
+D -        61 - boot_ddr_share_data_to_aop
+D -       488 - boot_clock_init_rpm
+D -         0 - boot_vsense_copy_to_smem
+D -        31 - boot_populate_ram_partition_table
+D -        30 - boot_populate_ddr_details_shared_table
+D -         0 - sbl1_tlmm_init
+D -         0 - sbl1_efs_handle_cookies
+D -        31 - sbl1_sw_shmem_init
+Wait 3sec (No input) ......Wait 2sec (No input) ......Wait 1sec (No input) ......D -   3009008 - sbl1_sw_console_init
+B -   7433246 - OEM_MISC -  Image Load, Start
+D -       519 - Auth Metadata
+D -       214 - Segments hash check
+D -     10370 - OEM_MISC -  Image Loaded, Delta - (7736 Bytes)
+B -   7446941 - QTI_MISC -  Image Load, Start
+D -      5703 - QTI_MISC -  Image Loaded, Delta - (0 Bytes)
+B -   7462374 - PM: PM Total Mem Allocated: 2340 
+D -      5551 - sbl1_pm_aop_pre_init_wrapper
+B -   7466949 - AOP -  Image Load, Start
+D -       702 - Auth Metadata
+D -      1586 - Segments hash check
+D -     13145 - AOP -  Image Loaded, Delta - (203304 Bytes)
+B -   7483388 - QSEE Dev Config -  Image Load, Start
+D -       640 - Auth Metadata
+D -       518 - Segments hash check
+D -     13054 - QSEE Dev Config -  Image Loaded, Delta - (47304 Bytes)
+B -   7505470 - QSEE -  Image Load, Start
+D -     17446 - Auth Metadata
+D -     21991 - Segments hash check
+D -     87139 - QSEE -  Image Loaded, Delta - (3689939 Bytes)
+D -       122 - sbl1_sw_restore_power_supply
+D -        61 - sbl1_hw_play_vibr
+B -   7605663 - SEC -  Image Load, Start
+D -      3324 - SEC -  Image Loaded, Delta - (64 Bytes)
+B -   7612556 - CPUCPFW -  Image Load, Start
+D -     17293 - Auth Metadata
+D -     17568 - Segments hash check
+D -     48007 - CPUCPFW -  Image Loaded, Delta - (171304 Bytes)
+B -   7669591 - QHEE -  Image Load, Start
+D -     17232 - Auth Metadata
+D -      9303 - Segments hash check
+D -     30622 - QHEE -  Image Loaded, Delta - (1945857 Bytes)
+B -   7703537 - APPSBL -  Image Load, Start
+D -       793 - Auth Metadata
+D -     11133 - Segments hash check
+D -     23699 - APPSBL -  Image Loaded, Delta - (2560000 Bytes)
+D -        61 - sbl1_sw_restore_power_supply
+D -         0 - sbl1_save_appsbl_index
+B -   7740564 - SBL1, End
+D -   7659801 - SBL1, Delta
+S - Flash Throughput, 192050 KB/s  (8834306 Bytes,  46789 us)
+S - DDR Frequency, 1555 MHz
+0       7.878644 Hypervisor cold boot, version: haven-35898553a prod (Wed Oct 4 10:26:07 2023 UTC)
+[RM]Starting Resource Manager, version: 9a25288c (Tue Jan 31 10:13:11 2023 UTC)
+[RM]init completed
+[RM]UART is disabled
+
+
+UEFI Start     [ 7984]
+ - 0x09FC01000 [ 7987] Sec.efi
+ASLR        : ON
+DEP         : ON (RTB)
+Timer Delta : -4294 mS
+RAM Entry 0 : Base 0x0080000000  Size 0x0039300000
+RAM Entry 1 : Base 0x018000000
