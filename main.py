@@ -61,6 +61,7 @@ def readThread(ser):
     global rcv_size
     global rcv_datas
     global readThreadRun
+    global isRun
 
     # 쓰레드 종료될때까지 계속 돌림
     while isRun:
