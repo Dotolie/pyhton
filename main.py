@@ -70,7 +70,10 @@ def readThread(ser):
             if len(buf) > 0 :
                 #데이터가 있있다면
                 rcv_datas = rcv_datas + buf
-                rcv_size = rcv_size + len(buf)
+            else:
+                time.sleep(0.002)
+        time.sleep(0.01)
+
 
 
 def fileWrite(datas):
@@ -114,7 +117,8 @@ def mainloop():
     # 전송 파일 열기
     file_content = read_file_to_memory("reboot.log")
     fil_size = len(file_content)
-    fil_hash = get_hash(file_content.encode('utf-8'))
+    fil_bin = file_content.encode('utf-8')
+    fil_hash = get_hash(fil_bin)
 
     tt = time.strftime('%Y.%m.%d-%H:%M:%S')
     wow = dbg(f"[{tt}]                file:sz={fil_size} [{fil_hash}]")
@@ -125,9 +129,6 @@ def mainloop():
     rthread.start()
 
     while isMain:
-        test_count = test_count + 1
-        
-
         readThreadRun = True
 
         t1 = time.time()
@@ -137,7 +138,7 @@ def mainloop():
         # with open('./reboot.log', 'r') as in_file:
         #     for line in in_file.read():
         #         ser.write(line.encode('utf-8'))
-        ser.write(file_content.encode('utf-8'))
+        ser.write(fil_bin)
 
         t2 = time.time()
         te = time.strftime('%Y.%m.%d-%H:%M:%S')
@@ -150,7 +151,11 @@ def mainloop():
         if not isMain:
             break
 
+        test_count = test_count + 1
+        
         rcv_hash = get_hash(rcv_datas)
+        rcv_size = len(rcv_datas)
+
         if rcv_hash == fil_hash:
             pass_count = pass_count + 1
             wow = dbg(f"[{te}] [{pass_count:3d}/{test_count:3d}] {port} pass:sz={rcv_size} [{rcv_hash}] {(rcv_size*8)/(t2-t1):.0f} bps")

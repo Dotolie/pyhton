@@ -28,7 +28,7 @@ baud = 9600 # 시리얼 보드레이트(통신속도)
 
 
 rcv_size = 0
-rcv_datas = ""
+rcv_datas = b''
 
 rthread = object
 readThreadRun = True
@@ -74,20 +74,22 @@ def readThread4socket(client):
     while isRun:       
         while readThreadRun:
             try:
-                buf = client.recv(BUFSIZE).decode('utf-8')
-            except BlockingIOError:
-                buf = ""
+                buf = client.recv(BUFSIZE)
+            except BlockingIOError as e:
+                buf = b''
                 pass
             if len(buf) > 0:
                 rcv_datas = rcv_datas + buf
-                rcv_size = rcv_size + len(buf)
                 # print("l=", len(buf),",", rcv_size)
+            else:
+                time.sleep(0.002)
+        time.sleep(0.01)
 
 
 def fileWrite(datas):
     filename = "./received-"+port+".txt"
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write(datas)
+        f.write(datas.decode('utf-8'))
     f.close()
     print("write error data")
 
@@ -115,9 +117,11 @@ def mainloop():
     test_count = 0
     fail_count = 0
     pass_count = 0
+    isFirst = 1
     
     # 서버 열기
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     client.setblocking(False)
     SERVERPORT = serverport
     SERVERADDR = (SERVERIP, SERVERPORT)
@@ -128,16 +132,16 @@ def mainloop():
 
 
     #시리얼 열기
-    wow = (f"port={port}, baud={baud}, socket={serverport}")
+    wow = dbg(f"port={port}, baud={baud}, socket={serverport}")
     print(wow)
-    dbg(wow)
-
+    LogWrite(wow)
     ser = serial.Serial(port, baud, timeout=0)
 
     # 전송 파일 열기
-    file_content = read_file_to_memory("reboot.log")
+    file_content = read_file_to_memory("reboot-long.log")
     fil_size = len(file_content)
-    fil_hash = get_hash(file_content.encode('utf-8'))
+    fil_bin = file_content.encode('utf-8')
+    fil_hash = get_hash(fil_bin)
 
     tt = time.strftime('%Y.%m.%d-%H:%M:%S')
     wow = dbg(f"[{tt}]                file:sz={fil_size} [{fil_hash}]")
@@ -149,8 +153,6 @@ def mainloop():
     rthread.start()
 
     while isMain:
-        test_count = test_count + 1
-
         readThreadRun = True
 
         t1 = time.time()
@@ -160,7 +162,7 @@ def mainloop():
         # with open('./reboot.log', 'r') as in_file:
         #     for line in in_file.read():
         #         ser.write(line.encode('utf-8'))
-        ser.write(file_content.encode('utf-8'))
+        ser.write(fil_bin)
 
         t2 = time.time()
         te = time.strftime('%Y.%m.%d-%H:%M:%S')
@@ -173,28 +175,34 @@ def mainloop():
         if not isMain:
             break
 
-        rcv_hash = get_hash(rcv_datas.encode('utf-8'))
-        
-        if rcv_hash == fil_hash:
-            pass_count = pass_count + 1
-            wow = dbg(f"[{te}] [{pass_count:3d}/{test_count:3d}] {port} pass:sz={rcv_size} [{rcv_hash}] {(rcv_size*8)/(t2-t1):.0f} bps")
+        if isFirst == 1 :
+            isFirst = 0
         else:
-            fail_count = fail_count + 1
-            wow = dbg(f"[{te}] [{fail_count:3d}/{test_count:3d}] {port} {COLOR_RED}fail{COLOR_END}:sz={rcv_size} [{rcv_hash}]")
-            fileWrite(rcv_datas)
+            test_count = test_count + 1
+            
+            rcv_hash = get_hash(rcv_datas)
+            rcv_size = len(rcv_datas)
 
-        print(wow)
-        LogWrite(wow)
+            if rcv_hash == fil_hash:
+                pass_count = pass_count + 1
+                wow = dbg(f"[{te}] [{pass_count:3d}/{test_count:3d}] {port} pass:sz={rcv_size} [{rcv_hash}] {(rcv_size*8)/(t2-t1):.0f} bps")
+            else:
+                fail_count = fail_count + 1
+                wow = dbg(f"[{te}] [{fail_count:3d}/{test_count:3d}] {port} {COLOR_RED}fail{COLOR_END}:sz={rcv_size} [{rcv_hash}]")
+                fileWrite(rcv_datas)
 
-        rcv_datas = ""
+            print(wow)
+            LogWrite(wow)
+
+        rcv_datas = b''
         rcv_size = 0
 
     # quit sequence
     while True:
         try:
-            buf = client.recv(4096).decode('utf-8')
-        except BlockingIOError:
-            buf = ""
+            buf = client.recv(4096)
+        except BlockingIOError as e:
+            buf = b''
             pass
         if len(buf) <= 0:
             break
